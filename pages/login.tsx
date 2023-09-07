@@ -15,7 +15,7 @@ const LoginPage: React.FC = () => {
           </h1>
         </nav>
         <div className="flex justify-center grow">
-          <div className="bg-black bg-opacity-70 p-16 lg:my-16 self-center lg:w-2/5 lg:max-w-md rounded-md w-full h-full lg:h-auto">
+          <form className="bg-black bg-opacity-70 px-8 py-16 lg:p-16 lg:my-16 self-center lg:w-2/5 lg:max-w-md rounded-md w-full h-full lg:h-auto">
             <h2 className="text-white text-3xl mb-8 font-semibold text-center">
               Sign in
             </h2>
@@ -29,11 +29,12 @@ const LoginPage: React.FC = () => {
               />
               <Input
                 label="Password"
-                // type="password"
+                type="password"
                 value={password}
                 onChange={(e: any) => {
                   setPassword(e.target.value);
                 }}
+                autoComplete="on"
               />
             </div>
             <button className="bg-[#14aab4] py-3 text-white rounded-md w-full mt-10 hover:bg-[#0a565c] transition">
@@ -42,13 +43,13 @@ const LoginPage: React.FC = () => {
             <p className="text-neutral-500 mt-12 text-center">
               First time on waves?
               <Link
-                href="/register"
+                href="signup"
                 className="text-white ml-1 hover:underline cursor-pointer"
               >
                 Create an account
               </Link>
             </p>
-          </div>
+          </form>
         </div>
       </div>
     </div>

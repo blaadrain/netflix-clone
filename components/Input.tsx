@@ -3,9 +3,16 @@ type Input = {
   type?: string;
   value?: string;
   onChange?: any;
+  autoComplete?: 'on' | 'off';
 };
 
-const Input: React.FC<Input> = ({ label, type, value, onChange }) => {
+const Input: React.FC<Input> = ({
+  label,
+  type,
+  value,
+  onChange,
+  autoComplete,
+}) => {
   return (
     <div className="relative">
       <input
@@ -15,6 +22,7 @@ const Input: React.FC<Input> = ({ label, type, value, onChange }) => {
         className="block rounded-md px-6 pt-6 pb-1 w-full text-md text-white bg-neutral-900 appearance-none focus:outline-none focus:ring-0 peer"
         placeholder=" "
         type={type}
+        autoComplete={autoComplete}
       />
       <label
         htmlFor={label}
