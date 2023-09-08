@@ -1,10 +1,25 @@
 import Input from '@/components/Input';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+import { signIn } from 'next-auth/react';
+import { FcGoogle } from 'react-icons/fc';
+import { FaGithub } from 'react-icons/fa';
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const login = useCallback(async () => {
+    try {
+      const ans = await signIn('credentials', {
+        email,
+        password,
+        callbackUrl: '/profiles',
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }, [email, password]);
 
   return (
     <div className="flex relative w-full h-screen bg-[url('/images/hero.svg')] bg-black bg-center bg-fixed bg-cover bg-no-repeat">
@@ -15,7 +30,7 @@ const LoginPage: React.FC = () => {
           </h1>
         </nav>
         <div className="flex justify-center grow">
-          <form className="bg-black bg-opacity-70 px-8 py-16 lg:p-16 lg:my-16 self-center lg:w-2/5 lg:max-w-md rounded-md w-full h-full lg:h-auto">
+          <div className="bg-black bg-opacity-70 px-8 py-16 lg:p-16 lg:my-16 self-center lg:w-2/5 lg:max-w-md rounded-md w-full h-full lg:h-auto">
             <h2 className="text-white text-3xl mb-8 font-semibold text-center">
               Sign in
             </h2>
@@ -37,9 +52,26 @@ const LoginPage: React.FC = () => {
                 autoComplete="on"
               />
             </div>
-            <button className="bg-[#14aab4] py-3 text-white rounded-md w-full mt-10 hover:bg-[#0a565c] transition">
+            <button
+              onClick={login}
+              className="bg-[#14aab4] py-3 text-white rounded-md w-full mt-10 hover:bg-[#0a565c] transition"
+            >
               Login
             </button>
+            <div className="flex flex-row justify-center items-center gap-4 mt-8 ">
+              <div
+                onClick={() => signIn('google', { callbackUrl: '/profiles' })}
+                className="w-10 h-10 bg-white rounded-full flex justify-center items-center cursor-pointer hover:opacity-80 transition"
+              >
+                <FcGoogle size={30} />
+              </div>
+              <div
+                onClick={() => signIn('github', { callbackUrl: '/profiles' })}
+                className="w-10 h-10 bg-white rounded-full flex justify-center items-center cursor-pointer hover:opacity-80 transition"
+              >
+                <FaGithub size={30} />
+              </div>
+            </div>
             <p className="text-neutral-500 mt-12 text-center">
               First time on waves?
               <Link
@@ -49,7 +81,7 @@ const LoginPage: React.FC = () => {
                 Create an account
               </Link>
             </p>
-          </form>
+          </div>
         </div>
       </div>
     </div>
