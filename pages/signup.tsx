@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useCallback, useState } from 'react';
 import { signIn } from 'next-auth/react';
 
-const SignUpPage: React.FC = () => {
+const SignUpPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

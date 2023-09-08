@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import useCurrentUser from '@/hooks/useCurrentUser';
 import { NextPageContext } from 'next';
 import { getSession } from 'next-auth/react';
@@ -18,7 +19,7 @@ export async function getServerSideProps(context: NextPageContext) {
   return { props: {} };
 }
 
-const ProfilesPage: React.FC = () => {
+const ProfilesPage = () => {
   const router = useRouter();
   const { data: user } = useCurrentUser();
 
@@ -33,7 +34,7 @@ const ProfilesPage: React.FC = () => {
             <div className="group flex-row w-44 mx-auto">
               <div className="w-44 h-44 rounded-md flex justify-center items-center border-2 border-transparent group-hover:cursor-pointer group-hover:border-white overflow-hidden">
                 <img
-                  src="/images/default-red.png"
+                  src="/images/default-slate.png"
                   alt="Profile Icon"
                 />
               </div>

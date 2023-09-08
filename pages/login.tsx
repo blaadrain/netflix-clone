@@ -5,7 +5,7 @@ import { signIn } from 'next-auth/react';
 import { FcGoogle } from 'react-icons/fc';
 import { FaGithub } from 'react-icons/fa';
 
-const LoginPage: React.FC = () => {
+const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -25,9 +25,9 @@ const LoginPage: React.FC = () => {
     <div className="flex relative w-full h-screen bg-[url('/images/hero.svg')] bg-black bg-center bg-fixed bg-cover bg-no-repeat">
       <div className="flex flex-col w-full h-full bg-black bg-opacity-50">
         <nav className="px-12 py-5 bg-black">
-          <h1 className="inline-block text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-teal-400 to-cyan-600">
+          <span className="inline-block text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-teal-400 to-cyan-600">
             waves
-          </h1>
+          </span>
         </nav>
         <div className="flex justify-center grow">
           <div className="bg-black bg-opacity-70 px-8 py-16 lg:p-16 lg:my-16 self-center lg:w-2/5 lg:max-w-md rounded-md w-full h-full lg:h-auto">
