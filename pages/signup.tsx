@@ -23,7 +23,7 @@ const SignUpPage = () => {
 
   const signup = useCallback(async () => {
     try {
-      await axios.post('/api/auth/signup', { name, email, password });
+      await axios.post('/api/signup', { name, email, password });
       login();
     } catch (error) {
       console.log(error);

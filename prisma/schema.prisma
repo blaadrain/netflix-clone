@@ -62,10 +62,10 @@ model VerificationToken {
 
 model Movie {
   id String @id @default(cuid())
-  title String
-  description String
-  videoUrl String
-  thumbnailUrl String
-  genre String
+  title String @db.VarChar(100)
+  description String @db.VarChar(3000)
+  videoUrl String @db.VarChar(1000)
+  thumbnailUrl String @db.VarChar(1000)
+  genre String 
   duration String
 }

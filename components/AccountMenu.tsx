@@ -9,7 +9,7 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ hidden }) => {
   if (hidden) return null;
 
   return (
-    <div className="flex flex-col border-2 border-zinc-700 bg-zinc-800 w-56 absolute top-12 right-0 py-5">
+    <div className="flex flex-col border-2 border-zinc-700 rounded-lg bg-zinc-800 w-56 absolute top-12 right-0 py-5">
       <div className="flex flex-col gap-3">
         <div className="flex flex-row px-4 group/item gap-3 items-center w-full">
           <img
