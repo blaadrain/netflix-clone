@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import useCurrentUser from '@/hooks/useCurrentUser';
 import { NextPageContext } from 'next';
 import { getSession } from 'next-auth/react';

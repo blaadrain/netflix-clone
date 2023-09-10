@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import useCurrentUser from '@/hooks/useCurrentUser';
 import { signOut } from 'next-auth/react';
 

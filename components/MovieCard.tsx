@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import { BsPlayFill, BsChevronDown } from 'react-icons/bs';
 import FavoriteButton from './FavoriteButton';
 import { useRouter } from 'next/router';
