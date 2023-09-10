@@ -39,11 +39,11 @@ const Navbar: React.FC = () => {
   return (
     <nav className="w-full fixed z-40">
       <div
-        className={`px-4 md:px-12 py-8 flex flex-row items-center transition duration-500 ${
+        className={`px-4 md:px-12 py-6 flex flex-row items-center transition duration-500 ${
           showBackground ? 'bg-zinc-900 bg-opacity-90' : ''
         }`}
       >
-        <span className="self-start inline-block text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-teal-400 to-cyan-600">
+        <span className="inline-block h-[60px] text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-teal-400 to-cyan-600">
           waves
         </span>
         <div className="flex-row ml-8 gap-7 hidden lg:flex">
@@ -57,7 +57,7 @@ const Navbar: React.FC = () => {
           onClick={toggleMobileMenu}
           className="lg:hidden flex flex-row items-center gap-2 ml-8 cursor-pointer relative"
         >
-          <p className="text-white text-xl text-sm">Browse</p>
+          <p className="text-white text-sm md:text-xl">Browse</p>
           <BsChevronDown
             size={26}
             className={`text-white transition ${

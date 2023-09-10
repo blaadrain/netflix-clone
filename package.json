@@ -19,6 +19,7 @@
     "bcrypt": "^5.1.0",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
+    "lodash": "^4.17.21",
     "next": "13.3.0",
     "next-auth": "^4.22.1",
     "postcss": "8.4.22",
@@ -30,6 +31,7 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
-    "@types/bcrypt": "^5.0.0"
+    "@types/bcrypt": "^5.0.0",
+    "@types/lodash": "^4.14.198"
   }
 }
