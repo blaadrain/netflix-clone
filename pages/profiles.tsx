@@ -1,7 +1,8 @@
-import useCurrentUser from '@/hooks/useCurrentUser';
-import { NextPageContext } from 'next';
-import { getSession } from 'next-auth/react';
+import { NextPage, NextPageContext } from 'next';
 import { useRouter } from 'next/router';
+import { getSession } from 'next-auth/react';
+
+import useCurrentUser from '@/hooks/useCurrentUser';
 
 export async function getServerSideProps(context: NextPageContext) {
   const session = await getSession(context);
@@ -18,7 +19,7 @@ export async function getServerSideProps(context: NextPageContext) {
   return { props: {} };
 }
 
-const ProfilesPage = () => {
+const ProfilesPage: NextPage = () => {
   const router = useRouter();
   const { data: user } = useCurrentUser();
 
@@ -33,7 +34,7 @@ const ProfilesPage = () => {
             <div className="group flex-row w-44 mx-auto">
               <div className="w-44 h-44 rounded-md flex justify-center items-center border-2 border-transparent group-hover:cursor-pointer group-hover:border-white overflow-hidden">
                 <img
-                  src="/images/default-slate.png"
+                  src="/images/profile-icons/default-slate.png"
                   alt="Profile Icon"
                 />
               </div>

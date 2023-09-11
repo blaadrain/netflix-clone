@@ -1,7 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { without } from 'lodash';
-import prismadb from '@/lib/prismadb';
-import serverAuth from '@/lib/serverAuth';
+
+import prismadb from '@/libs/prismadb';
+import serverAuth from '@/libs/serverAuth';
 
 export default async function handler(
   req: NextApiRequest,
@@ -12,19 +13,20 @@ export default async function handler(
       return res.status(405).end();
     }
 
+    const { currentUser } = await serverAuth(req, res);
+    const { movieId } = req.body || (req.query as { movieId: string });
+
+    const existingMovie = await prismadb.movie.findUnique({
+      where: {
+        id: movieId,
+      },
+    });
+
+    if (!existingMovie) {
+      throw new Error('Invalid Id');
+    }
+
     if (req.method === 'POST') {
-      const { currentUser } = await serverAuth(req, res);
-      const { movieId } = req.body;
-      const existingMovie = await prismadb.movie.findUnique({
-        where: {
-          id: movieId,
-        },
-      });
-
-      if (!existingMovie) {
-        throw new Error('Invalid Id');
-      }
-
       const updatedUser = await prismadb.user.update({
         where: {
           email: currentUser.email || '',
@@ -40,18 +42,6 @@ export default async function handler(
     }
 
     if (req.method === 'DELETE') {
-      const { currentUser } = await serverAuth(req, res);
-      const { movieId } = req.query as { movieId: string };
-      const existingMovie = await prismadb.movie.findUnique({
-        where: {
-          id: movieId,
-        },
-      });
-
-      if (!existingMovie) {
-        throw new Error('Invalid ID');
-      }
-
       const updatedFavoriteIds = without(currentUser.favoriteIds, movieId);
 
       const updatedUser = await prismadb.user.update({

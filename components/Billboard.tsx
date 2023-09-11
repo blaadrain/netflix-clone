@@ -1,6 +1,6 @@
-import useBillboard from '@/hooks/useBillboard';
-import PlayButton from './PlayButton';
 import { useCallback } from 'react';
+import PlayButton from './PlayButton';
+import useBillboard from '@/hooks/useBillboard';
 import useInfoModal from '@/hooks/useInfoModal';
 
 const Billboard: React.FC = () => {

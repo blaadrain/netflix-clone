@@ -1,10 +1,12 @@
-import axios from 'axios';
-import Input from '@/components/Input';
-import Link from 'next/link';
 import { useCallback, useState } from 'react';
+import { NextPage } from 'next';
+import Link from 'next/link';
 import { signIn } from 'next-auth/react';
+import axios from 'axios';
 
-const SignUpPage = () => {
+import Input from '@/components/Input';
+
+const SignUpPage: NextPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -51,7 +53,6 @@ const SignUpPage = () => {
                   setName(e.target.value);
                 }}
               />
-
               <Input
                 label="Email"
                 value={email}

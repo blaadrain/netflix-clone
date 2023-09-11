@@ -1,6 +1,6 @@
+import { useRouter } from 'next/router';
 import { BsPlayFill, BsChevronDown } from 'react-icons/bs';
 import FavoriteButton from './FavoriteButton';
-import { useRouter } from 'next/router';
 import useInfoModal from '@/hooks/useInfoModal';
 
 type MovieCardProps = {
@@ -28,7 +28,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
           <div className="flex flex-row items-center gap-3">
             <div
               onClick={() => {
-                router.push(`/watch/${data?.id}`);
+                router.push(`/movie/${data?.id}`);
               }}
               className="cursor-pointer mt-[1px] w-8 h-8 lg:w-10 lg:h-10 bg-white rounded-full flex justify-center items-center transition hover:bg-neutral-300"
             >

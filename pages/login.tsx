@@ -1,17 +1,20 @@
-import Input from '@/components/Input';
-import Link from 'next/link';
 import { useCallback, useState } from 'react';
+import { NextPage } from 'next';
+import Link from 'next/link';
 import { signIn } from 'next-auth/react';
-import { FcGoogle } from 'react-icons/fc';
-import { FaGithub } from 'react-icons/fa';
 
-const LoginPage = () => {
+import { FaGithub } from 'react-icons/fa';
+import { FcGoogle } from 'react-icons/fc';
+
+import Input from '@/components/Input';
+
+const LoginPage: NextPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const login = useCallback(async () => {
     try {
-      const ans = await signIn('credentials', {
+      await signIn('credentials', {
         email,
         password,
         callbackUrl: '/profiles',
@@ -30,7 +33,7 @@ const LoginPage = () => {
           </span>
         </nav>
         <div className="flex justify-center grow">
-          <div className="bg-black bg-opacity-70 px-8 py-16 lg:p-16 lg:my-16 self-center lg:w-2/5 lg:max-w-md rounded-md w-full h-full lg:h-auto">
+          <div className="bg-black bg-opacity-70 px-8 py-16 lg:p-14 lg:my-16 self-center lg:w-3/5 lg:max-w-lg rounded-md w-full h-full lg:h-auto">
             <h2 className="text-white text-3xl mb-8 font-semibold text-center">
               Sign in
             </h2>
@@ -73,7 +76,11 @@ const LoginPage = () => {
               </div>
             </div>
             <p className="text-neutral-500 mt-12 text-center">
-              First time on waves?
+              First time on{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-br from-teal-400 to-cyan-600">
+                waves
+              </span>
+              ?
               <Link
                 href="signup"
                 className="text-white ml-1 hover:underline cursor-pointer"

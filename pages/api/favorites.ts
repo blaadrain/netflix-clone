@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import prismadb from '@/lib/prismadb';
-import serverAuth from '@/lib/serverAuth';
+
+import prismadb from '@/libs/prismadb';
+import serverAuth from '@/libs/serverAuth';
 
 export default async function handler(
   req: NextApiRequest,
@@ -12,6 +13,7 @@ export default async function handler(
     }
 
     const { currentUser } = await serverAuth(req, res);
+
     const favoritedMovies = await prismadb.movie.findMany({
       where: {
         id: {

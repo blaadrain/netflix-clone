@@ -78,7 +78,7 @@ const Navbar: React.FC = () => {
           >
             <div className="w-8 h-8 rounded-md overflow-hidden">
               <img
-                src="/images/default-slate.png"
+                src="/images/profile-icons/default-slate.png"
                 alt="Profile Icon"
               />
             </div>

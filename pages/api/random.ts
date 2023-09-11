@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import prismadb from '@/lib/prismadb';
-import serverAuth from '@/lib/serverAuth';
+
+import prismadb from '@/libs/prismadb';
+import serverAuth from '@/libs/serverAuth';
 
 export default async function handler(
   req: NextApiRequest,
@@ -15,6 +16,7 @@ export default async function handler(
 
     const moviesCount = await prismadb.movie.count();
     const randomIndex = Math.floor(Math.random() * moviesCount);
+
     const randomMovies = await prismadb.movie.findMany({
       take: 1,
       skip: randomIndex,

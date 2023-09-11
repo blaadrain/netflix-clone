@@ -1,5 +1,5 @@
-import useCurrentUser from '@/hooks/useCurrentUser';
 import { signOut } from 'next-auth/react';
+import useCurrentUser from '@/hooks/useCurrentUser';
 
 type AccountMenuProps = {
   hidden?: boolean;
@@ -16,7 +16,7 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ hidden }) => {
         <div className="flex flex-row px-4 group/item gap-3 items-center w-full">
           <img
             className="w-8 rounded-md"
-            src="/images/default-slate.png"
+            src="/images/profile-icons/default-slate.png"
             alt="Profile Icon"
           />
           <span className="text-white text-sm group-hover/item::underline">
@@ -28,7 +28,10 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ hidden }) => {
           onClick={() => signOut()}
           className="px-3 text-center text-white text-sm hover:underline"
         >
-          Sign out of waves
+          Sign out of{' '}
+          <span className="text-transparent bg-clip-text bg-gradient-to-br from-teal-400 to-cyan-600">
+            waves
+          </span>
         </div>
       </div>
     </div>

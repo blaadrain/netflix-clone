@@ -1,8 +1,8 @@
-import axios from 'axios';
 import { useCallback, useMemo } from 'react';
-import useCurrentUser from '@/hooks/useCurrentUser';
-import useFavorites from '@/hooks/useFavorites';
 import { AiOutlinePlus, AiOutlineCheck } from 'react-icons/ai';
+import axios from 'axios';
+import useFavorites from '@/hooks/useFavorites';
+import useCurrentUser from '@/hooks/useCurrentUser';
 
 type FavoriteButtonProps = {
   movieId: string;
@@ -11,6 +11,7 @@ type FavoriteButtonProps = {
 const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId }) => {
   const { mutate: mutateFavorites } = useFavorites();
   const { data: user, mutate } = useCurrentUser();
+
   const isFavorite = useMemo(() => {
     const list = user?.favoriteIds || [];
     return list.includes(movieId);
@@ -33,7 +34,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId }) => {
     });
 
     mutateFavorites();
-  }, [user, movieId, isFavorite, mutate, mutateFavorites]);
+  }, [user, isFavorite, movieId, mutate, mutateFavorites]);
 
   const Icon = isFavorite ? AiOutlineCheck : AiOutlinePlus;
 

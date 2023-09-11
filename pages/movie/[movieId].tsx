@@ -1,9 +1,10 @@
-import useMovie from '@/hooks/useMovie';
 import { useRouter } from 'next/router';
 import { BsArrowBarLeft } from 'react-icons/bs';
+import useMovie from '@/hooks/useMovie';
 
 const Player = () => {
   const router = useRouter();
+
   const { movieId } = router.query;
   const { data } = useMovie(movieId as string);
 
