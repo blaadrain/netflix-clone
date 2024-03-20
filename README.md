@@ -21,7 +21,7 @@ Features:
 ### Cloning the repository
 
 ```shell
-git clone [https://github.com/AntonioErdeljac/next-netflix-tutorial.git](https://github.com/blaadrain/netflix-clone.git)
+git clone https://github.com/blaadrain/netflix-clone.git
 ```
 
 ### Install packages
