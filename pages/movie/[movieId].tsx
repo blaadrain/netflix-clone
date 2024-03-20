@@ -1,6 +1,6 @@
-import { useRouter } from 'next/router';
-import { BsArrowBarLeft } from 'react-icons/bs';
-import useMovie from '@/hooks/useMovie';
+import { useRouter } from "next/router";
+import { BsArrowBarLeft } from "react-icons/bs";
+import useMovie from "@/hooks/useMovie";
 
 const Player = () => {
   const router = useRouter();
@@ -9,7 +9,7 @@ const Player = () => {
   const { data } = useMovie(movieId as string);
 
   // const onMouseMoveCaptureHandler = () => {
-
+  // TODO: hide movie title
   // };
 
   return (
@@ -17,13 +17,13 @@ const Player = () => {
       className="h-screen w-screen bg-black"
       //onMouseMove={onMouseMoveCaptureHandler}
     >
-      <nav className="fixed w-full p-6 z-10 flex flex-row items-center gap-8 bg-black bg-opacity-70">
+      <nav className="fixed z-10 flex w-full flex-row items-center gap-8 bg-black bg-opacity-70 p-6">
         <BsArrowBarLeft
-          onClick={() => router.push('/')}
-          className="text-white hover:text-neutral-300 transition cursor-pointer"
+          onClick={() => router.push("/")}
+          className="cursor-pointer text-white transition hover:text-neutral-300"
           size={40}
         />
-        <p className="text-white text-xl md:text-3xl font-bold">
+        <p className="text-xl font-bold text-white md:text-3xl">
           {data?.title}
         </p>
       </nav>

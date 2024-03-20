@@ -1,38 +1,41 @@
-import NextAuth, { AuthOptions } from 'next-auth';
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
-import Credentials from 'next-auth/providers/credentials';
-import GithubProvider from 'next-auth/providers/github';
-import GoogleProvider from 'next-auth/providers/google';
+import NextAuth, { AuthOptions } from "next-auth";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import Credentials from "next-auth/providers/credentials";
+import GithubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
 
-import { compare } from 'bcrypt';
-import prismadb from '@/libs/prismadb';
+import { compare } from "bcrypt";
+import prismadb from "@/libs/prismadb";
 
 export const authOptions: AuthOptions = {
+  pages: {
+    signIn: "/login",
+  },
   providers: [
     GithubProvider({
-      clientId: process.env.GITHUB_ID || '',
-      clientSecret: process.env.GITHUB_SECRET || '',
+      clientId: process.env.GITHUB_ID || "",
+      clientSecret: process.env.GITHUB_SECRET || "",
     }),
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID || '',
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
+      clientId: process.env.GOOGLE_CLIENT_ID || "",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
     }),
     Credentials({
-      id: 'credentials',
-      name: 'Credentials',
+      id: "credentials",
+      name: "Credentials",
       credentials: {
         email: {
-          label: 'Email',
-          type: 'text',
+          label: "Email",
+          type: "text",
         },
         password: {
-          label: 'Password',
-          type: 'passord',
+          label: "Password",
+          type: "passord",
         },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          throw new Error('Email and password required');
+          throw new Error("Email and password required");
         }
 
         const user = await prismadb.user.findUnique({
@@ -42,28 +45,25 @@ export const authOptions: AuthOptions = {
         });
 
         if (!user || !user.hashedPassword) {
-          throw new Error('Email does not exist');
+          throw new Error("Email does not exist");
         }
 
         const isCorrectPassword = await compare(
           credentials.password,
-          user.hashedPassword
+          user.hashedPassword,
         );
 
         if (!isCorrectPassword) {
-          throw new Error('Incorrect password');
+          throw new Error("Incorrect password");
         }
 
         return user;
       },
     }),
   ],
-  pages: {
-    signIn: '/login',
-  },
-  debug: process.env.NODE_ENV === 'development',
+  debug: process.env.NODE_ENV === "development",
   adapter: PrismaAdapter(prismadb),
-  session: { strategy: 'jwt' },
+  session: { strategy: "jwt" },
   jwt: {
     secret: process.env.NEXTAUTH_JWT_SECRET,
   },

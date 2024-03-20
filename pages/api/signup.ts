@@ -1,14 +1,14 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiRequest, NextApiResponse } from "next";
 
-import bcrypt from 'bcrypt';
-import prismadb from '@/libs/prismadb';
+import bcrypt from "bcrypt";
+import prismadb from "@/libs/prismadb";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   try {
-    if (req.method !== 'POST') {
+    if (req.method !== "POST") {
       return res.status(405).end();
     }
 
@@ -18,7 +18,7 @@ export default async function handler(
     if (isUserExists) {
       return res
         .status(422)
-        .json({ error: 'Account with this email already exists' });
+        .json({ error: "Account with this email already exists" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 12);
@@ -28,7 +28,7 @@ export default async function handler(
         name,
         email,
         hashedPassword,
-        image: '',
+        image: "",
         emailVerified: new Date(),
       },
     });

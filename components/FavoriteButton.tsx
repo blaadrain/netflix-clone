@@ -1,8 +1,8 @@
-import { useCallback, useMemo } from 'react';
-import { AiOutlinePlus, AiOutlineCheck } from 'react-icons/ai';
-import axios from 'axios';
-import useFavorites from '@/hooks/useFavorites';
-import useCurrentUser from '@/hooks/useCurrentUser';
+import { useCallback, useMemo } from "react";
+import { AiOutlinePlus, AiOutlineCheck } from "react-icons/ai";
+import axios from "axios";
+import useFavorites from "@/hooks/useFavorites";
+import useCurrentUser from "@/hooks/useCurrentUser";
 
 type FavoriteButtonProps = {
   movieId: string;
@@ -23,7 +23,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId }) => {
     if (isFavorite) {
       response = await axios.delete(`/api/favorite?movieId=${movieId}`);
     } else {
-      response = await axios.post('/api/favorite', { movieId });
+      response = await axios.post("/api/favorite", { movieId });
     }
 
     const updatedFavoriteIds = response?.data?.favoriteIds;
@@ -41,7 +41,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId }) => {
   return (
     <div
       onClick={toggleFavorites}
-      className="cursor-pointer group/item mt-[2px] lg:mt-0 w-8 h-8 lg:w-10 lg:h-10 border-2 border-white rounded-full flex justify-center items-center transition hover:border-neutral-300"
+      className="group/item mt-[2px] flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border-2 border-white transition hover:border-neutral-300 lg:mt-0 lg:h-10 lg:w-10"
     >
       <Icon
         className="text-white transition hover:text-neutral-300 lg:mr-[1px]"

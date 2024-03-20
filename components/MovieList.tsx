@@ -1,5 +1,5 @@
-import { isEmpty } from 'lodash';
-import MovieCard from './MovieCard';
+import { isEmpty } from "lodash";
+import MovieCard from "./MovieCard";
 
 type MovieListProps = {
   data: Record<string, any>[];
@@ -10,17 +10,14 @@ const MovieList: React.FC<MovieListProps> = ({ data, title }) => {
   if (isEmpty(data)) return null;
 
   return (
-    <div className="px-4 md:px-12 mt-12 space-y-8">
+    <div className="mt-12 space-y-8 px-4 md:px-12">
       <div>
-        <p className="text-white text-xl md:text-2xl lg:text-3xl font-semibold mb-4">
+        <p className="mb-4 text-xl font-semibold text-white md:text-2xl lg:text-3xl">
           {title}
         </p>
         <div className="grid grid-cols-4 gap-4">
           {data.map((movie) => (
-            <MovieCard
-              key={movie.id}
-              data={movie}
-            />
+            <MovieCard key={movie.id} data={movie} />
           ))}
         </div>
       </div>

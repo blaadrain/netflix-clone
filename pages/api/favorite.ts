@@ -1,15 +1,15 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { without } from 'lodash';
+import { NextApiRequest, NextApiResponse } from "next";
+import { without } from "lodash";
 
-import prismadb from '@/libs/prismadb';
-import serverAuth from '@/libs/serverAuth';
+import prismadb from "@/libs/prismadb";
+import serverAuth from "@/libs/serverAuth";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   try {
-    if (req.method !== 'POST' && req.method !== 'DELETE') {
+    if (req.method !== "POST" && req.method !== "DELETE") {
       return res.status(405).end();
     }
 
@@ -23,17 +23,17 @@ export default async function handler(
     });
 
     if (!existingMovie) {
-      throw new Error('Invalid Id');
+      throw new Error("Invalid Id");
     }
 
-    if (req.method === 'POST') {
+    if (req.method === "POST") {
       const updatedUser = await prismadb.user.update({
         where: {
-          email: currentUser.email || '',
+          email: currentUser.email || "",
         },
         data: {
           favoriteIds: {
-            push: movieId,
+            set: [...currentUser.favoriteIds, movieId],
           },
         },
       });
@@ -41,12 +41,12 @@ export default async function handler(
       return res.status(200).json(updatedUser);
     }
 
-    if (req.method === 'DELETE') {
+    if (req.method === "DELETE") {
       const updatedFavoriteIds = without(currentUser.favoriteIds, movieId);
 
       const updatedUser = await prismadb.user.update({
         where: {
-          email: currentUser.email || '',
+          email: currentUser.email || "",
         },
         data: {
           favoriteIds: updatedFavoriteIds,
@@ -56,7 +56,7 @@ export default async function handler(
       return res.status(200).json(updatedUser);
     }
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res.status(400).end();
   }
 }

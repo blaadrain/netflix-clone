@@ -1,8 +1,8 @@
-import NavbarItem from './NavbarItem';
-import MobileMenu from './MobileMenu';
-import { BsChevronDown, BsSearch, BsBell } from 'react-icons/bs';
-import { useCallback, useEffect, useState } from 'react';
-import AccountMenu from './AccountMenu';
+import NavbarItem from "./NavbarItem";
+import MobileMenu from "./MobileMenu";
+import { BsChevronDown, BsSearch, BsBell } from "react-icons/bs";
+import { useCallback, useEffect, useState } from "react";
+import AccountMenu from "./AccountMenu";
 
 const TOP_OFFSET = 66;
 
@@ -20,10 +20,10 @@ const Navbar: React.FC = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -36,16 +36,16 @@ const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <nav className="w-full fixed z-40">
+    <nav className="fixed z-40 w-full">
       <div
-        className={`px-4 md:px-12 py-6 flex flex-row items-center transition duration-500 ${
-          showBackground ? 'bg-zinc-900 bg-opacity-90' : ''
+        className={`flex flex-row items-center px-4 py-6 transition duration-500 md:px-12 ${
+          showBackground ? "bg-zinc-900 bg-opacity-90" : ""
         }`}
       >
-        <span className="inline-block h-[60px] text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-teal-400 to-cyan-600">
+        <span className="inline-block h-[60px] bg-gradient-to-br from-teal-400 to-cyan-600 bg-clip-text text-4xl font-bold text-transparent md:text-5xl">
           waves
         </span>
-        <div className="flex-row ml-8 gap-7 hidden lg:flex">
+        <div className="ml-8 hidden flex-row gap-7 lg:flex">
           <NavbarItem label="Home" />
           <NavbarItem label="Series" />
           <NavbarItem label="Films" />
@@ -54,29 +54,29 @@ const Navbar: React.FC = () => {
         </div>
         <div
           onClick={toggleMobileMenu}
-          className="lg:hidden flex flex-row items-center gap-2 ml-8 cursor-pointer relative"
+          className="relative ml-8 flex cursor-pointer flex-row items-center gap-2 lg:hidden"
         >
-          <p className="text-white text-sm md:text-xl">Browse</p>
+          <p className="text-sm text-white md:text-xl">Browse</p>
           <BsChevronDown
             size={26}
             className={`text-white transition ${
-              showMobileMenu ? 'rotate-180' : 'rotate-0'
+              showMobileMenu ? "rotate-180" : "rotate-0"
             }`}
           />
           <MobileMenu hidden={!showMobileMenu} />
         </div>
-        <div className="flex flex-row ml-auto gap-7 items-center">
-          <div className="text-white hover:text-gray-300 cursor-pointer transition">
+        <div className="ml-auto flex flex-row items-center gap-7">
+          <div className="cursor-pointer text-white transition hover:text-gray-300">
             <BsSearch size={26} />
           </div>
-          <div className="text-white hover:text-gray-300 cursor-pointer transition">
+          <div className="cursor-pointer text-white transition hover:text-gray-300">
             <BsBell size={26} />
           </div>
           <div
             onClick={toggleAccountMenu}
-            className="flex flex-row items-center gap-2 cursor-pointer relative"
+            className="relative flex cursor-pointer flex-row items-center gap-2"
           >
-            <div className="w-8 h-8 rounded-md overflow-hidden">
+            <div className="h-8 w-8 overflow-hidden rounded-md">
               <img
                 src="/images/profile-icons/default-slate.png"
                 alt="Profile Icon"
@@ -85,7 +85,7 @@ const Navbar: React.FC = () => {
             <BsChevronDown
               size={26}
               className={`text-white transition ${
-                showAccountMenu ? 'rotate-180' : 'rotate-0'
+                showAccountMenu ? "rotate-180" : "rotate-0"
               }`}
             />
             <AccountMenu hidden={!showAccountMenu} />
