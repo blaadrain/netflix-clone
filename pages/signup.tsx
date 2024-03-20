@@ -1,22 +1,22 @@
-import { useCallback, useState } from 'react';
-import { NextPage } from 'next';
-import Link from 'next/link';
-import { signIn } from 'next-auth/react';
-import axios from 'axios';
+import { useCallback, useState } from "react";
+import { NextPage } from "next";
+import Link from "next/link";
+import { signIn } from "next-auth/react";
+import axios from "axios";
 
-import Input from '@/components/Input';
+import Input from "@/components/Input";
 
 const SignUpPage: NextPage = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const login = useCallback(async () => {
     try {
-      await signIn('credentials', {
+      await signIn("credentials", {
         email,
         password,
-        callbackUrl: '/',
+        callbackUrl: "/",
       });
     } catch (error) {
       console.log(error);
@@ -25,7 +25,7 @@ const SignUpPage: NextPage = () => {
 
   const signup = useCallback(async () => {
     try {
-      await axios.post('/api/signup', { name, email, password });
+      await axios.post("/api/signup", { name, email, password });
       login();
     } catch (error) {
       console.log(error);
@@ -33,16 +33,16 @@ const SignUpPage: NextPage = () => {
   }, [name, email, password, login]);
 
   return (
-    <div className="flex relative w-full h-screen bg-[url('/images/hero.svg')] bg-black bg-center bg-fixed bg-cover bg-no-repeat">
-      <div className="flex flex-col w-full h-full bg-black bg-opacity-50">
-        <nav className="px-12 py-5 bg-black">
-          <h1 className="inline-block text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-teal-400 to-cyan-600">
+    <div className="relative flex h-screen w-full bg-black bg-[url('/images/hero.svg')] bg-cover bg-fixed bg-center bg-no-repeat">
+      <div className="flex h-full w-full flex-col bg-black bg-opacity-50">
+        <nav className="bg-black px-12 py-5">
+          <span className="inline-block bg-gradient-to-br from-teal-400 to-cyan-600 bg-clip-text text-4xl font-bold text-transparent">
             waves
-          </h1>
+          </span>
         </nav>
-        <div className="flex justify-center grow">
-          <div className="bg-black bg-opacity-70 px-8 py-16 lg:my-16 self-center lg:w-2/5 lg:max-w-md rounded-md w-full h-full lg:h-auto">
-            <h2 className="text-white text-3xl mb-8 font-semibold text-center">
+        <div className="flex grow justify-center">
+          <div className="h-full w-full self-center rounded-md bg-black bg-opacity-70 px-8 py-16 lg:my-16 lg:h-auto lg:w-2/5 lg:max-w-md">
+            <h2 className="mb-8 text-center text-3xl font-semibold text-white">
               Create an account
             </h2>
             <div className="flex flex-col gap-4">
@@ -72,15 +72,15 @@ const SignUpPage: NextPage = () => {
             </div>
             <button
               onClick={signup}
-              className="bg-[#14aab4] py-3 text-white rounded-md w-full mt-10 hover:bg-[#0a565c] transition"
+              className="mt-10 w-full rounded-md bg-[#14aab4] py-3 text-white transition hover:bg-[#0a565c]"
             >
               Submit
             </button>
-            <p className="text-neutral-500 mt-12 text-center">
+            <p className="mt-12 text-center text-neutral-500">
               Already have an account?
               <Link
                 href="login"
-                className="text-white ml-1 hover:underline cursor-pointer"
+                className="ml-1 cursor-pointer text-white hover:underline"
               >
                 Sign in
               </Link>

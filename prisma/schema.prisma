@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "cockroachdb"
   url      = env("DATABASE_URL")
 }
 
@@ -30,12 +30,12 @@ model Account {
   type String
   provider String
   providerAccountId String
-  access_token String? @db.VarChar(3000)
-  refresh_token String? @db.VarChar(3000)
+  access_token String? 
+  refresh_token String? 
   expires_at Int?
   token_type String?
   scope String?
-  id_token String? @db.VarChar(3000)
+  id_token String? 
   session_state String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -62,10 +62,10 @@ model VerificationToken {
 
 model Movie {
   id String @id @default(cuid())
-  title String @db.VarChar(100)
-  description String @db.VarChar(3000)
-  videoUrl String @db.VarChar(1000)
-  thumbnailUrl String @db.VarChar(1000)
+  title String
+  description String
+  videoUrl String 
+  thumbnailUrl String 
   genre String 
   duration String
 }
