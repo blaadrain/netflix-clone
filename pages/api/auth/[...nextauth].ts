@@ -5,7 +5,8 @@ import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 
 import { compare } from "bcrypt";
-import prismadb from "@/libs/prismadb";
+import prismadb from "@/lib/prismadb";
+import { LoginSchema } from "@/schemas";
 
 export const authOptions: AuthOptions = {
   pages: {
@@ -33,31 +34,27 @@ export const authOptions: AuthOptions = {
           type: "passord",
         },
       },
-      async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
-          throw new Error("Email and password required");
+      async authorize(values) {
+        const validatedFields = LoginSchema.safeParse(values);
+
+        if (validatedFields.success) {
+          const { email, password } = validatedFields.data;
+
+          const user = await prismadb.user.findUnique({
+            where: { email },
+          });
+
+          if (!user || !user.hashedPassword) return null;
+
+          const isPasswordCorrect = await compare(
+            password,
+            user.hashedPassword,
+          );
+
+          if (isPasswordCorrect) return user;
         }
 
-        const user = await prismadb.user.findUnique({
-          where: {
-            email: credentials.email,
-          },
-        });
-
-        if (!user || !user.hashedPassword) {
-          throw new Error("Email does not exist");
-        }
-
-        const isCorrectPassword = await compare(
-          credentials.password,
-          user.hashedPassword,
-        );
-
-        if (!isCorrectPassword) {
-          throw new Error("Incorrect password");
-        }
-
-        return user;
+        return null;
       },
     }),
   ],
