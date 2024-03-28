@@ -120,32 +120,40 @@ const LoginPage = () => {
                   <Button disabled={isLoading} className="w-full">
                     Submit
                   </Button>
-                  <Separator />
-                  <div className="flex gap-x-2">
-                    <Button
-                      disabled={isLoading}
-                      variant="outline"
-                      className="w-1/2"
-                    >
-                      <FcGoogle className="h-5 w-5" />
-                    </Button>
-                    <Button
-                      disabled={isLoading}
-                      variant="outline"
-                      className="w-1/2"
-                    >
-                      <FaGithub className="h-5 w-5" />
-                    </Button>
-                  </div>
-                  <Button
-                    variant="link"
-                    asChild
-                    className="p-0 text-muted-foreground"
-                  >
-                    <Link href="/signup">Don&apos;t have an account?</Link>
-                  </Button>
                 </form>
               </Form>
+              <div className="space-y-6">
+                <Separator className="mt-6" />
+                <div className="flex gap-x-2">
+                  <Button
+                    disabled={isLoading}
+                    variant="outline"
+                    className="w-1/2"
+                    onClick={() =>
+                      signIn("google", { callbackUrl: "/profiles" })
+                    }
+                  >
+                    <FcGoogle className="h-5 w-5" />
+                  </Button>
+                  <Button
+                    disabled={isLoading}
+                    variant="outline"
+                    className="w-1/2"
+                    onClick={() =>
+                      signIn("github", { callbackUrl: "/profiles" })
+                    }
+                  >
+                    <FaGithub className="h-5 w-5" />
+                  </Button>
+                </div>
+                <Button
+                  variant="link"
+                  asChild
+                  className="w-full p-0 text-muted-foreground"
+                >
+                  <Link href="/signup">Don&apos;t have an account?</Link>
+                </Button>
+              </div>
             </CardContent>
           </Card>
         </div>
